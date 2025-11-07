@@ -1,38 +1,290 @@
-.App {
+/* Import Google Font (Poppins is a great choice) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* --- CSS Variables for Cleanliness & Consistency --- */
+:root {
+  --color-dark-bg: #0d0d0d;
+  --color-card-bg-light: #1a1a1a;
+  --color-primary-gold: #ffd700;
+  --color-secondary-gold: #ffcc00;
+  --color-text-light: #f5f5f5;
+  --color-text-faded: #ccc;
+  --color-border-dark: #333;
+  --box-shadow-gold: 0 0 15px rgba(255, 215, 0, 0.2);
+  --border-radius-large: 16px;
+  --border-radius-small: 10px;
+}
+
+body {
+  background-color: var(--color-dark-bg);
+  color: var(--color-text-light);
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 90%;
+  max-width: 650px; 
+  margin: 40px auto;
+  padding: 30px;
+  background: linear-gradient(135deg, var(--color-card-bg-light), #292929);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--box-shadow-gold);
   text-align: center;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  body {
+    align-items: flex-start;
+  }
+  .container {
+    margin: 20px auto;
+    padding: 20px;
+    width: 95%;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* --- Typography --- */
+.title {
+  font-size: 2.5rem;
+  color: var(--color-primary-gold);
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: var(--color-text-faded);
+  margin-bottom: 25px;
+  font-weight: 300;
+}
+
+/* --- Textarea (Improved for golden border on focus) --- */
+textarea {
+  width: 100%;
+  min-height: 120px;
+  background: #111;
+  color: var(--color-text-light);
+  border: 1px solid var(--color-border-dark);
+  border-radius: var(--border-radius-small);
+  padding: 15px;
+  resize: vertical;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  transition: border 0.3s ease;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--color-primary-gold);
+}
+
+/* --- Buttons (Solid Gold Background) --- */
+button {
+  width: 100%;
+  background: var(--color-primary-gold);
+  color: #000;
+  border: none;
+  padding: 14px 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: var(--border-radius-small);
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-top: 20px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4); 
+}
+
+button:hover:not(:disabled) {
+  background: var(--color-secondary-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 215, 0, 0.6); 
+}
+
+button:disabled {
+  background: #444;
+  color: #999;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* --- Voice Selector Grid Layout --- */
+.voice-selector {
+  margin-top: 25px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.voice-selector h3 {
+  color: var(--color-primary-gold);
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.voice-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.voice-card {
+  display: flex;
+  flex-direction: column; /* Stack content vertically */
+  align-items: flex-start;
+  padding: 15px;
+  background: #252525;
+  /* !!! NEW: Golden border for all voice cards !!! */
+  border: 1px solid var(--color-primary-gold); 
+  border-radius: var(--border-radius-small);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-align: left;
+  box-shadow: 0 0 5px rgba(255, 215, 0, 0.15); /* Subtle initial shadow */
+}
+
+.voice-card:hover {
+  background: #333;
+  border-color: var(--color-secondary-gold); /* Hover brightens gold */
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Stronger shadow on hover */
+}
+
+.voice-card.selected {
+  border-width: 2px; /* Thicker border when selected */
+  border-color: var(--color-primary-gold);
+  background: #2b2b2b; 
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.8); /* Even brighter shadow for selection */
+}
+
+.voice-icon {
+  font-size: 1.1rem; 
+  margin-right: 8px;
+  display: inline-block;
+  color: var(--color-primary-gold); 
+}
+
+.voice-details h4 {
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 1.1rem;
+  color: var(--color-primary-gold); 
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+.voice-details h4 .voice-icon {
+    font-size: 1.2rem;
+    margin-right: 8px;
+}
+
+.voice-details p {
+  margin: 0;
+  font-size: 0.9rem; /* Slightly larger description font */
+  color: var(--color-text-faded);
+  font-weight: 400;
+}
+
+
+@media (max-width: 600px) {
+  .voice-options-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Audio Player (Golden Track Styling) --- */
+.audio-section {
+  margin-top: 30px;
+  padding: 15px;
+  border-radius: var(--border-radius-small);
+  background: #222;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 15px;
+  /* Added golden border and shadow for audio section */
+  border: 1px solid var(--color-primary-gold);
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
 }
 
-.App-link {
-  color: #61dafb;
+audio {
+  width: 100%;
+  max-width: 450px;
+  filter: sepia(20%) saturate(150%) brightness(100%) hue-rotate(-20deg);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
+/* WebKit (Chrome, Safari) specific styles for the audio player bar */
+audio::-webkit-media-controls-panel {
+    background-color: #2b2b2b;
+    border-radius: var(--border-radius-small);
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-mute-button,
+audio::-webkit-media-controls-volume-slider {
+    color: var(--color-primary-gold);
+}
+
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display {
+    color: var(--color-text-faded);
+}
+
+audio::-webkit-media-controls-timeline {
+    background-color: #444;
+    border-radius: 10px;
+}
+
+audio::-webkit-media-controls-timeline-container {
+    background-color: #444;
+}
+
+
+.download-btn {
+  margin-top: 0;
+  width: auto;
+  padding: 12px 30px;
+}
+
+
+/* --- Loader (No changes needed) --- */
+.loader {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-primary-gold);
+  font-weight: 600;
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid var(--color-border-dark);
+  border-top: 3px solid var(--color-primary-gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  100% {
     transform: rotate(360deg);
   }
+}
+
+/* --- Footer --- */
+footer {
+  margin-top: 30px;
+  font-size: 0.8rem;
+  color: #777;
 }
