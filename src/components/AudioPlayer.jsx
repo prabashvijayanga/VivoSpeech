@@ -22,7 +22,7 @@ export default function AudioPlayer({ audioUrl }) {
         Your browser does not support the audio element.
       </audio>
       <button className="download-btn" onClick={downloadAudio}>
-        ⬇️ Download Audio
+         ⬇️ Download Audio
       </button>
     </div>
   );
